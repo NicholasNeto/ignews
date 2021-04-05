@@ -1,3 +1,4 @@
+
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 
@@ -9,6 +10,16 @@ export default NextAuth({
             clientSecret: process.env.GITHUB_CLIENT_SECRET,
             scope: 'read:user'
         }),
-        
+
     ],
+
+
+    callbacks: {
+        async signIn(user, account, profile) {
+
+            console.log(user)
+            return true
+        },
+    }
+
 })
