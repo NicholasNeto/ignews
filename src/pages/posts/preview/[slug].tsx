@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next"
+import { GetStaticPaths, GetStaticProps } from "next"
 import { useSession } from "next-auth/client"
 import Head from "next/head"
 import Link from "next/link"
@@ -62,7 +62,13 @@ export default function PostPreview({ post }: PostPreviewPorps) {
 }
 
 
-export const getStaticPaths = () => {
+export const getStaticPaths : GetStaticPaths = async () => {
+    // Busca dos ultimos posts ou algum post especifico.
+    // paths: [
+    //     { params: {slug: 'TypeScript: Vantagens, mitos, dicas e conceitos fundamentais'}}
+    // ],
+
+
     return {
         paths: [],
         fallback: 'blocking'
@@ -91,6 +97,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return {
         props: {
             post,
-        }
+        },
+        redirect: 60 * 30 // 30 minutos
     }
 }
